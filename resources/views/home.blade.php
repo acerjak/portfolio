@@ -19,13 +19,18 @@
             Skip to projects
         </a>
 
-        <header class="sticky top-0 z-40 border-b-2 border-pink-200 bg-paper-card/95 shadow-sm shadow-ink/5 backdrop-blur">
+        <header
+            x-data="{ mobileMenuOpen: false }"
+            @keydown.escape.window="mobileMenuOpen = false"
+            class="sticky top-0 z-40 border-b-2 border-pink-200 bg-paper-card/95 shadow-sm shadow-ink/5 backdrop-blur"
+        >
             <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
                 <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-2 font-serif text-base font-medium tracking-tight whitespace-nowrap text-ink sm:text-lg">
                     <span class="size-2 rounded-full bg-pink-500"></span>
                     Amanda Cojerean
                 </a>
-                <nav class="flex items-center gap-3 text-xs text-ink-soft sm:gap-5 sm:text-sm">
+
+                <nav class="hidden items-center gap-5 text-sm text-ink-soft sm:flex">
                     <a href="#projects" class="hover:text-pink-600">Projects</a>
                     <a href="#about" class="hover:text-pink-600">About</a>
                     <a href="#contact" class="hover:text-pink-600">Contact</a>
@@ -35,7 +40,39 @@
                         <a href="{{ route('login') }}" class="hover:text-pink-600">Log in</a>
                     @endauth
                 </nav>
+
+                <button
+                    @click="mobileMenuOpen = !mobileMenuOpen"
+                    type="button"
+                    class="flex size-9 items-center justify-center rounded-full border border-mustard-300 text-ink transition hover:border-teal-500 sm:hidden"
+                    :aria-expanded="mobileMenuOpen"
+                    aria-label="Toggle menu"
+                >
+                    <svg x-show="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" class="size-5">
+                        <path d="M4 7h16M4 12h16M4 17h16" />
+                    </svg>
+                    <svg x-show="mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" class="size-5" style="display: none;">
+                        <path d="M6 6l12 12M18 6L6 18" />
+                    </svg>
+                </button>
             </div>
+
+            <nav
+                x-show="mobileMenuOpen"
+                x-cloak
+                x-transition
+                @click="mobileMenuOpen = false"
+                class="flex flex-col gap-1 border-t border-pink-100 bg-paper-card px-4 py-3 text-sm text-ink-soft sm:hidden"
+            >
+                <a href="#projects" class="rounded-lg px-2 py-2 hover:bg-pink-50 hover:text-pink-600">Projects</a>
+                <a href="#about" class="rounded-lg px-2 py-2 hover:bg-pink-50 hover:text-pink-600">About</a>
+                <a href="#contact" class="rounded-lg px-2 py-2 hover:bg-pink-50 hover:text-pink-600">Contact</a>
+                @auth
+                    <a href="{{ route('dashboard') }}" class="rounded-lg px-2 py-2 hover:bg-pink-50 hover:text-pink-600">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="rounded-lg px-2 py-2 hover:bg-pink-50 hover:text-pink-600">Log in</a>
+                @endauth
+            </nav>
         </header>
 
         <main>
@@ -72,6 +109,17 @@
                                 </svg>
                             </a>
                             <a
+                                href="https://gitlab.com/acerjak"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="GitLab"
+                                class="flex size-11 items-center justify-center rounded-full border border-mustard-300 text-ink-soft transition hover:border-teal-500 hover:text-pink-600"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                    <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0 1 18.6 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z" />
+                                </svg>
+                            </a>
+                            <a
                                 href="https://www.linkedin.com/in/acerjak/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -105,6 +153,24 @@
                                 </svg>
                             </a>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- Behind the code --}}
+            <section class="mx-auto max-w-5xl px-4 pb-16 sm:px-6 sm:pb-20">
+                <div class="flex flex-col items-center gap-6 rounded-3xl border border-pink-100 bg-paper-card p-8 text-center shadow-md shadow-ink/5 sm:p-12">
+                    <img
+                        src="{{ asset('images/amanda.jpg') }}"
+                        alt="Portrait of Amanda Cojerean"
+                        class="size-36 rounded-full border-4 border-mustard-300 object-cover shadow-sm sm:size-44"
+                    >
+                    <div>
+                        <p class="font-serif text-2xl font-medium text-ink">Hi, I'm Amanda</p>
+                        <p class="mt-3 max-w-xl text-ink-soft">
+                            Thanks for stopping by! Whether you're here about a role, a project, or just curious what
+                            I've built, I'd love to hear from you.
+                        </p>
                     </div>
                 </div>
             </section>
