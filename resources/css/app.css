@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Fraunces', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    /* Retro pop palette: cream paper, warm ink, pink/teal/mustard accents. */
+    --color-paper: #f6eed4;
+    --color-paper-card: #fffcf3;
+    --color-paper-muted: #ecdcae;
+    --color-ink: #21201e;
+    --color-ink-soft: #6b5d54;
+
+    --color-pink-50: #fceef3;
+    --color-pink-100: #f8d3e0;
+    --color-pink-300: #ef9db8;
+    --color-pink-500: #e8437b;
+    --color-pink-600: #c92f64;
+    --color-pink-700: #a32350;
+
+    --color-teal-50: #e6f5f5;
+    --color-teal-100: #c3e8e8;
+    --color-teal-300: #7dcccc;
+    --color-teal-500: #17a6a6;
+    --color-teal-600: #128585;
+    --color-teal-700: #0d6666;
+
+    --color-mustard-50: #fdf3de;
+    --color-mustard-100: #fbe4b0;
+    --color-mustard-300: #f7cd6e;
+    --color-mustard-500: #f4b740;
+    --color-mustard-600: #d89a22;
+    --color-mustard-700: #b27d16;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    body {
+        background-image: radial-gradient(circle at 1.5px 1.5px, rgba(200, 55, 105, 0.28) 1.5px, transparent 0);
+        background-size: 24px 24px;
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
