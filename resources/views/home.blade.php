@@ -247,8 +247,8 @@
                 <div class="rounded-3xl border border-teal-100 bg-paper-card p-6 shadow-md shadow-ink/5 sm:p-10">
                     <h2 class="font-serif text-3xl font-medium text-ink">About</h2>
                     <p class="mt-4 max-w-2xl text-ink-soft">
-                        I'm a software engineer based in Huntington Beach, CA. I got my start through UCI's Coding
-                        Bootcamp and have been building ever since&mdash;currently at S90 Technology.
+                        I'm a software engineer based in Orange County, CA. I got my start through UCI's Coding
+                        Bootcamp and have been building ever since&mdash;currently at Neon Bang.
                     </p>
                 </div>
             </section>
