@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Enums\ContactReason;
+use App\Enums\InquiryReason;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ContactFormSubmitted extends Mailable
+class InquiryReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,14 +19,14 @@ class ContactFormSubmitted extends Mailable
         public readonly ?string $company,
         public readonly string $phone,
         public readonly string $email,
-        public readonly ContactReason $reason,
+        public readonly InquiryReason $reason,
         public readonly string $body,
     ) {}
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Portfolio contact: {$this->name}",
+            subject: "Portfolio inquiry: {$this->name}",
             replyTo: [new Address($this->email, $this->name)],
         );
     }
@@ -34,7 +34,7 @@ class ContactFormSubmitted extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.contact',
+            markdown: 'mail.inquiry',
         );
     }
 }

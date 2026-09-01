@@ -1,5 +1,5 @@
 <x-mail::message>
-# New contact form submission
+# New inquiry
 
 **From:** {{ $name }} ({{ $email }})
 
@@ -19,5 +19,5 @@
 Reply to {{ $name }}
 </x-mail::button>
 
-Sent from the portfolio contact form.
+Sent from the portfolio inquiry form.
 </x-mail::message>

@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ContactReason: string
+enum InquiryReason: string
 {
     case General = 'general';
     case BrandDeal = 'brand_deal';

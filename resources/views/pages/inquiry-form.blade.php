@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\ContactReason;
-use App\Mail\ContactFormSubmitted;
+use App\Enums\InquiryReason;
+use App\Mail\InquiryReceived;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
@@ -41,7 +41,7 @@ new class extends Component {
             'company' => ['nullable', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:30'],
             'email' => ['required', 'email', 'max:255'],
-            'reason' => ['required', Rule::enum(ContactReason::class)],
+            'reason' => ['required', Rule::enum(InquiryReason::class)],
             'body' => ['required', 'string', 'max:5000'],
         ]);
 
@@ -74,12 +74,12 @@ new class extends Component {
             }
         }
 
-        Mail::to(config('contact.to_address'))->send(new ContactFormSubmitted(
+        Mail::to(config('inquiry.to_address'))->send(new InquiryReceived(
             name: $validated['name'],
             company: $validated['company'] ?: null,
             phone: $validated['phone'],
             email: $validated['email'],
-            reason: ContactReason::from($validated['reason']),
+            reason: InquiryReason::from($validated['reason']),
             body: $validated['body'],
         ));
 
@@ -158,13 +158,13 @@ new class extends Component {
             </div>
 
             <div>
-                <label for="reason" class="mb-1.5 block text-sm font-medium text-ink">Reason for contact</label>
+                <label for="reason" class="mb-1.5 block text-sm font-medium text-ink">Reason for inquiry</label>
                 <select
                     id="reason"
                     wire:model="reason"
                     class="w-full rounded-xl border border-mustard-300 bg-paper px-4 py-2.5 text-sm text-ink focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none"
                 >
-                    @foreach (\App\Enums\ContactReason::cases() as $case)
+                    @foreach (\App\Enums\InquiryReason::cases() as $case)
                         <option value="{{ $case->value }}">{{ $case->label() }}</option>
                     @endforeach
                 </select>

@@ -263,7 +263,7 @@
                         </p>
 
                         <div class="mt-8">
-                            <livewire:pages::contact-form />
+                            <livewire:pages::inquiry-form />
                         </div>
                     </div>
                 </div>
