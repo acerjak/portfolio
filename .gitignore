@@ -25,3 +25,7 @@ yarn-error.log
 plan.md
 /docs/specs/
 /.planning/
+/.claude
+/.codex
+/.github
+AGENTS.md
