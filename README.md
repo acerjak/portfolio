@@ -18,7 +18,7 @@ A personal portfolio site built to showcase projects from UCI's Coding Bootcamp,
 ## Features
 
 - **Project showcase** — cards pulled from a seeded `Project` model, each with a title, tagline, tech stack, and links to the live demo or source
-- **Contact form** — name, company, phone, email, reason for contact, and message, delivered straight to my inbox with reply-to set to the sender
+- **Contact form** — name, company, phone, email, reason for inquiry, and message, submitted as an inquiry and delivered straight to my inbox with reply-to set to the sender
 - **Spam protection** — a honeypot field and a submission-time check block bots by default, with optional Cloudflare Turnstile verification that activates automatically once configured
 - **Fully responsive** — a collapsing hamburger menu on smaller screens, fluid layouts throughout
 - **A color palette with personality** — warm cream, hot pink, teal, and mustard, because portfolios don't have to be black and white
