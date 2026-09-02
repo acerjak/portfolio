@@ -163,7 +163,7 @@
                     <img
                         src="{{ asset('images/amanda.jpg') }}"
                         alt="Portrait of Amanda Cojerean"
-                        class="h-40 w-32 rounded-full border-4 border-mustard-300 object-cover shadow-sm sm:h-48 sm:w-40"
+                        class="h-30 w-24 rounded-full border-4 border-mustard-300 object-cover shadow-sm sm:h-36 sm:w-30"
                     >
                     <div>
                         <p class="font-serif text-2xl font-medium text-ink">Hi, I'm Amanda</p>
