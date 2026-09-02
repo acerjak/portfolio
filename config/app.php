@@ -7,13 +7,15 @@ return [
     | Application Name
     |--------------------------------------------------------------------------
     |
-    | This value is the name of your application, which will be used when the
-    | framework needs to place the application's name in a notification or
-    | other UI elements where an application name needs to be displayed.
+    | This is Amanda's public-facing brand name — the same string shown in
+    | the browser tab, the homepage heading, and the footer. It is identical
+    | in every environment, so it is a literal rather than an env lookup:
+    | keeping it out of the environment means a missing or misconfigured
+    | variable can never leave a scaffold default sitting in the title bar.
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'Amanda Cojerean',
 
     /*
     |--------------------------------------------------------------------------
