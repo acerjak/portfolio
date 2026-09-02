@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Catch-all: the origin is only reachable through Laravel Cloud's load balancer
+        // (plus Cloudflare in front of it), so forwarded headers cannot be spoofed by a
+        // client bypassing that hop.
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
