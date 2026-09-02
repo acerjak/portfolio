@@ -11,6 +11,16 @@ class RegistrationClosedTest extends TestCase
         $this->get('/register')->assertNotFound();
     }
 
+    public function test_register_route_does_not_accept_submissions(): void
+    {
+        $this->post('/register', [
+            'name' => 'Someone',
+            'email' => 'someone@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ])->assertNotFound();
+    }
+
     public function test_login_page_still_renders_after_registration_is_disabled(): void
     {
         $this->get(route('login'))->assertOk();

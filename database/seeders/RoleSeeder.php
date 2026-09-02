@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
@@ -20,6 +22,24 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        // Validate before any write: a misconfigured FOUNDER_PASSWORD must fail
+        // closed before roles or the founder account are touched, not partway
+        // through (retry-safe either way since every write below is firstOrCreate,
+        // but failing first avoids a deploy that "half seeds" on the first attempt).
+        $password = config('founder.password');
+
+        $validator = Validator::make(
+            ['password' => $password],
+            ['password' => ['required', 'string', Password::default()]],
+        );
+
+        if ($validator->fails()) {
+            throw new \RuntimeException(
+                'FOUNDER_PASSWORD must be set and meet the app\'s password strength rule: '
+                    .$validator->errors()->first('password')
+            );
+        }
+
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
         foreach (['founder', 'admin', 'client'] as $roleName) {
@@ -27,12 +47,6 @@ class RoleSeeder extends Seeder
         }
 
         app(PermissionRegistrar::class)->forgetCachedPermissions();
-
-        $password = config('founder.password');
-
-        if (! is_string($password) || $password === '') {
-            throw new \RuntimeException('FOUNDER_PASSWORD must be set to seed the founder account.');
-        }
 
         $founder = User::firstOrCreate(
             ['email' => config('founder.email')],
