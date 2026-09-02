@@ -21,4 +21,24 @@ class BrandingTest extends TestCase
         $response->assertOk();
         $response->assertSee('<title>Amanda Cojerean &middot; Portfolio</title>', false);
     }
+
+    public function test_homepage_icon_links_are_cache_busted(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee('href="/favicon.ico?v=2"', false);
+        $response->assertSee('href="/favicon.svg?v=2"', false);
+        $response->assertSee('href="/apple-touch-icon.png?v=2"', false);
+    }
+
+    public function test_auth_page_icon_links_are_cache_busted(): void
+    {
+        $response = $this->get('/login');
+
+        $response->assertOk();
+        $response->assertSee('href="/favicon.ico?v=2"', false);
+        $response->assertSee('href="/favicon.svg?v=2"', false);
+        $response->assertSee('href="/apple-touch-icon.png?v=2"', false);
+    }
 }
